@@ -90,7 +90,7 @@ export default {
   border-spacing: 0;
   td {
     padding: 10px;
-    border: 1px solid rgb(79, 79, 79);
+    border: 1px solid #e5e5e5;
   }
 }
 </style>
