@@ -1,11 +1,16 @@
 <template>
   <div class="footwear">
+    <transition name="fade">
+      <h2>
+        {{ messageNew () }}
+      </h2>
+    </transition>
     <select class="footwear__select" v-model="selectedValue">
       <option disabled value="">Enter brand</option>
-      <option value="2">Adidas</option>
-      <option value="3">ASICS</option>
-      <option value="4">Nike</option>
-      <option value="5">Reebok</option>
+      <option value="1">Adidas</option>
+      <option value="2">ASICS</option>
+      <option value="3">Nike</option>
+      <option value="4">Reebok</option>
     </select>
     <input
       type="text"
@@ -14,24 +19,18 @@
       v-on:input="inputChange"
       placeholder="Enter the length of the foot in mm"
     />
-    <span>Выбрано: {{ selectedValue }}</span>
-    <transition name="fade">
-      <h2 v-if="inputValue == 0 && selectedValue > 0">
-        You have't entered the length of the foot!
-      </h2>
-    </transition>
-    <transition name="fade">
-      <h2 v-if="inputValue < 1 && selectedValue == 0">Enter values</h2>
-    </transition>
-    <transition name="fade">
-      <h2 v-if="selectedValue == 0 && inputValue > 0">Enter brand</h2>
-    </transition>
-    <transition name="fade">
+    <transition
+      enter-active-class="duration-500"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="duration-75"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+      >
       <div
         class="container"
         v-if="inputValue > 0 && selectedValue.length !== 0"
       >
-        <h2>Your size is...</h2>
         <table class="footwear__table">
           <tbody>
             <tr>
@@ -65,11 +64,24 @@ export default {
       selectedValue: ''
     }
   },
-
   methods: {
     inputChange (event) {
       this.inputValue = event.target.value
+    },
+    messageNew () {
+      if (this.selectedValue === '' && this.inputValue > 0) {
+        return 'Enter brand'
+      } else if (this.selectedValue !== '' && this.inputValue <= 0) {
+        return "You have't entered the length of the foot"
+      } else if (this.selectedValue !== '' && this.inputValue !== 0) {
+        return 'Yor size is...'
+      } else if (this.selectedValue === '' && this.inputValue === '') {
+        return 'Enter values'
+      }
     }
+  },
+  computed: {
+
   },
 
   components: {}
@@ -98,15 +110,5 @@ export default {
     padding: 10px;
     border: 1px solid #e5e5e5;
   }
-}
-.fade-enter-active, .fade-leave-active{
-  transition-property: opacity;
-  transition-duration: .5s;
-}
-.fade-enter-active{
-  transition-delay: .1s;
-}
-.fade-enter, .fade-leave-active{
-  opacity: 0;
 }
 </style>
