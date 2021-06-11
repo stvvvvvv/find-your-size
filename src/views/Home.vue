@@ -1,10 +1,12 @@
 <template>
   <div class="footwear">
-    <transition name="fade">
-      <h2>
-        {{ messageNew () }}
-      </h2>
-    </transition>
+    <h1>Here you can find out the size of any foot!</h1>
+    <p>Even dinosaur, but that's not accurate :)</p>
+    <ul>
+      <li>Longest foot (Robert Wadlow): ~ 493mm</li>
+      <li>The shortest foot (Jyoti Amge): ~ 93mm</li>
+      <li>Length of the foot dinosaur: ~1750mm</li>
+    </ul>
     <select class="footwear__select" v-model="selectedValue">
       <option disabled value="">Enter brand</option>
       <option value="1">Adidas</option>
@@ -19,6 +21,9 @@
       v-on:input="inputChange"
       placeholder="Enter the length of the foot in mm"
     />
+    <h2>
+        {{ messageNew () }}
+      </h2>
     <transition name="fade">
       <div
         class="container"
@@ -28,15 +33,17 @@
           <tbody>
             <tr>
               <td>EUR</td>
-              <td>US</td>
+              <td>US (men)</td>
+              <td>US (women)</td>
               <td>UK</td>
               <td>RU</td>
             </tr>
             <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
+              <td>{{ Math.round((Number(inputValue) + (2 * 6.6666)) / 6.6666) }}</td>
+              <td>{{ Math.round((Number(inputValue) + (2 * 8.4666)) / 8.4666 - 24) }}</td>
+              <td>{{ Math.round((Number(inputValue) + (2 * 8.4666)) / 8.4666 - 23) }}</td>
+              <td>{{ Math.round((Number(inputValue) + (2 * 8.4666)) / 8.4666 - 25) }}</td>
+              <td>{{ Math.round((Number(inputValue) + (2 * 6.6666)) / 6.6666 - 1) }}</td>
             </tr>
           </tbody>
         </table>
@@ -54,13 +61,7 @@ export default {
   data () {
     return {
       inputValue: '',
-      selectedValue: '',
-      sizes: ({
-        sizeEUR: '',
-        sizeUK: '',
-        sizeUS: '',
-        sizeCM: ''
-      })
+      selectedValue: ''
     }
   },
   methods: {
