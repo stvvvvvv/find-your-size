@@ -19,14 +19,7 @@
       v-on:input="inputChange"
       placeholder="Enter the length of the foot in mm"
     />
-    <transition
-      enter-active-class="duration-500"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="duration-75"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-      >
+    <transition name="fade">
       <div
         class="container"
         v-if="inputValue > 0 && selectedValue.length !== 0"
@@ -61,7 +54,13 @@ export default {
   data () {
     return {
       inputValue: '',
-      selectedValue: ''
+      selectedValue: '',
+      sizes: ({
+        sizeEUR: '',
+        sizeUK: '',
+        sizeUS: '',
+        sizeCM: ''
+      })
     }
   },
   methods: {
@@ -81,7 +80,6 @@ export default {
     }
   },
   computed: {
-
   },
 
   components: {}
@@ -110,5 +108,17 @@ export default {
     padding: 10px;
     border: 1px solid #e5e5e5;
   }
+}
+.fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  transition: .5s;
+  opacity: 0;
+}
+.fade-enter{
+  transition: opacity .5;
+  transition: .5s;
+}
+.fade-enter-to{
+ transition: .5s;
+ transition: opacity .5;
 }
 </style>
