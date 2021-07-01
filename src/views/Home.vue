@@ -1,12 +1,6 @@
 <template>
   <div class="footwear">
     <h1>Here you can find out the size of any foot!</h1>
-    <p>Even dinosaur, but that's not accurate :)</p>
-    <ul>
-      <li>Longest foot (Robert Wadlow): ~ 493mm</li>
-      <li>The shortest foot (Jyoti Amge): ~ 93mm</li>
-      <li>Length of the foot dinosaur: ~1750mm</li>
-    </ul>
     <select class="footwear__select" v-model="selectedValue">
       <option disabled value="">Enter brand</option>
       <option value="1">Adidas</option>
@@ -41,7 +35,7 @@
             <tr>
               <td>{{ Math.round((Number(inputValue) + (2 * 6.6666)) / 6.6666) }}</td>
               <td>{{ Math.round((Number(inputValue) + (2 * 8.4666)) / 8.4666 - 24) }}</td>
-              <td>{{ Math.round((Number(inputValue) + (2 * 8.4666)) / 8.4666 - 23) }}</td>
+              <td>{{ Math.round((Number(inputValue) + (2 * 8.4666)) / 8.4666 - 23) + 0.5 }}</td>
               <td>{{ Math.round((Number(inputValue) + (2 * 8.4666)) / 8.4666 - 25) }}</td>
               <td>{{ Math.round((Number(inputValue) + (2 * 6.6666)) / 6.6666 - 1) }}</td>
             </tr>
@@ -80,8 +74,7 @@ export default {
       }
     }
   },
-  computed: {
-  },
+  computed: {},
 
   components: {}
 }
@@ -90,6 +83,18 @@ export default {
 <style lang='scss'>
 .container {
   margin: 0 10vw;
+}
+.sub-nav{
+    font-size: 14px;
+    padding-top: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 .footwear__select {
   margin-right: 20px;
@@ -122,4 +127,5 @@ export default {
  transition: .5s;
  transition: opacity .5;
 }
+
 </style>

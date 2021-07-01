@@ -8,9 +8,14 @@ const routes = [
     component: Home
   },
   {
-    path: '/clothing',
-    name: 'clothing',
-    component: () => import('../views/Сlothing.vue')
+    path: '/outwear',
+    name: 'outwear',
+    component: () => import('../views/Outwear.vue')
+  },
+  {
+    path: '/pants',
+    name: 'pants',
+    component: () => import('../views/Pants.vue')
   }
 ]
 
